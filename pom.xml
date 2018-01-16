@@ -12,6 +12,9 @@
         <module>app-limit-request-test</module>
         <module>hystrix-test</module>
         <module>servlet-3test</module>
+        <module>springmvc-servlet3</module>
+        <module>springmvcservlet3-noxml</module>
+        <module>springboot-servlet3</module>
     </modules>
 
 

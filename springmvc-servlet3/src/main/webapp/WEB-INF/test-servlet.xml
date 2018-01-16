@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Bean头部 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd  
+              http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd  
+           http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd              
+             http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+
+    <!-- 可以自定义线程池,设置拒绝策略,队列大小,执行超时时间,都要设置好-->
+    <bean id="myThreadPool"
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="corePoolSize" value="5" /><!--最小线程数 -->
+		<property name="maxPoolSize" value="10" /><!--最大线程数 -->
+		<property name="queueCapacity" value="50" /><!--缓冲队列大小 -->
+		<property name="threadNamePrefix" value="hello-" /><!--线程池中产生的线程名字前缀 -->
+		<property name="keepAliveSeconds" value="30" /><!--线程池中空闲线程的存活时间单位秒 -->
+	</bean>
+
+	<mvc:annotation-driven>
+		<mvc:async-support task-executor="myThreadPool"
+			default-timeout="600">
+			<mvc:callable-interceptors>
+				<bean class="com.kt.test.springmvcservlet3.springmvcservlet3.Interceptor" />
+			</mvc:callable-interceptors>
+		</mvc:async-support>
+	</mvc:annotation-driven>
+	<!-- 激活@Controller模式 -->
+
+	<!-- 对包中的所有类进行扫描，以完成Bean创建和自动依赖注入的功能 需要更改 -->
+	<context:component-scan base-package="com.kt.test.springmvcservlet3" />
+
+	<!-- 设置线程池 -->
+
+
+
+
+
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/jsp/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+</beans>
