@@ -4,6 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.AsyncContext;
+import javax.servlet.AsyncEvent;
+import javax.servlet.AsyncListener;
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.concurrent.Callable;
 
 /**
@@ -36,5 +41,38 @@ public class TestController {
             System.out.println(Thread.currentThread().getName());
             return "index";
         };
+    }
+
+    // custom more threadPool
+    @RequestMapping("/hello")
+    public void test(HttpServletRequest request){
+        AsyncContext context = request.getAsyncContext();
+        context.setTimeout(20 * 1000L);
+        //添加异步监听
+        context.addListener(new AsyncListener() {
+            @Override
+            public void onComplete(AsyncEvent asyncEvent) throws IOException {
+                System.out.println("onComplete");
+            }
+
+            @Override
+            public void onTimeout(AsyncEvent asyncEvent) throws IOException {
+                System.out.println("onTimeout");
+            }
+
+            @Override
+            public void onError(AsyncEvent asyncEvent) throws IOException {
+                System.out.println("onError");
+            }
+
+            @Override
+            public void onStartAsync(AsyncEvent asyncEvent) throws IOException {
+                System.out.println("onStartAsync");
+            }
+        });
+
+        //todo: submit other pool process
+
+
     }
 }
