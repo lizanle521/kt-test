@@ -12,11 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * @User: jufeng
  * @Date: 18-1-16
  * @Time: 上午10:58
+ * https://www.ibm.com/developerworks/cn/java/j-lo-servlet30/
  **/
 
 @WebServlet(urlPatterns = "/demo",asyncSupported = true,
@@ -34,7 +36,7 @@ public class AsyncDemoServlet extends HttpServlet {
         out.print("进入servlet 时间: "+new Date() + ".");
 
         AsyncContext context = req.getAsyncContext();
-
+        context.setTimeout(20 * 1000L);
         //添加异步监听
         context.addListener(new AsyncListener() {
             @Override
@@ -59,8 +61,14 @@ public class AsyncDemoServlet extends HttpServlet {
         });
 
         //子线程处理业务,并负责输出,主线成退出
-        new Thread(new Executor(context)).start();
+       /* new Thread(new Executor(context)).start();*/
+        ThreadPoolExecutor executor = (ThreadPoolExecutor) req
+                .getServletContext().getAttribute("executor");
+        executor.submit(new Executor(context));
+
         out.println("结束Servlet的时间：" + new Date() + ".");
+
+
         out.flush();
     }
 

@@ -2,7 +2,6 @@ package com.kt.test.servlet3;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
-import javax.xml.ws.WebFault;
 import java.io.IOException;
 
 /**
