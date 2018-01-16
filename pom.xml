@@ -11,6 +11,7 @@
     <modules>
         <module>app-limit-request-test</module>
         <module>hystrix-test</module>
+        <module>servlet-3test</module>
     </modules>
 
 
