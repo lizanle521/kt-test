@@ -44,7 +44,7 @@ public class TestController {
     }
 
     // custom more threadPool
-    @RequestMapping("/hello")
+    @RequestMapping("/test")
     public void test(HttpServletRequest request){
         AsyncContext context = request.getAsyncContext();
         context.setTimeout(20 * 1000L);
