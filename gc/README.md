@@ -87,12 +87,35 @@
         列 | 说明 | Jstat参数
         ----|------|----
         S0C | 输出Survivor0空间的大小。单位KB。  | -gc -gccapacity -gcnew -gcnewcapacity
-        ua | 服务端  | 是
-        ip | 服务端  | 是
-        clt | 客户端  | 是
-        pf | 客户端  | 是
-        typ | 客户端  | 是
-        tpc | 客户端  | 是
-        pid | 客户端  | 是
-        ppid | 客户端  | 是
-        eid | 客户端  | 是
+        S1C | 输出Survivor1空间的大小。单位KB。  | -gc -gccapacity -gcnew -gcnewcapacity
+        S0U | 输出Survivor0已用空间的大小。单位KB。  | -gc -gcnew
+        S1U | 输出Survivor1已用空间的大小。单位KB。  | -gc -gcnew
+        EC | 输出Eden空间的大小。单位KB。  | -gc -gccapacity -gcnew -gcnewcapacity
+        EU | 输出Eden已用空间的大小。单位KB。  | -gc -gcnew
+        OC | 输出老年代空间的大小。单位KB  | -gc -gccapacity -gcold -gcoldcapacity
+        OU | 输出老年代已用空间的大小。单位KB  | -gc  -gcold
+        PC | 输出持久代空间的大小。单位KB  | -gc -gccapacity -gcold -gcoldcapacity -gcpermcapacity
+        PU | 输出持久代已用空间的大小。单位KB。  | -gc -gcold
+        YGC | 新生代空间GC时间发生的次数   | -gc -gccapacity -gcnew -gcnewcapacity -gcold -gcoldcapacity -gcpermcapacity -gcutil -gccause
+        YGCT | 新生代GC处理花费的时间。  | -gc -gcnew -gcutil -gccause
+        FGC | full GC发生的次数  | -gc -gccapacity -gcnew -gcnewcapacity -gcold -gcoldcapacity -gcpermcapacity -gcutil -gccause
+        FGCT | full GC操作花费的时间  | -gc -gccapacity -gcnew -gcold -gcoldcapacity -gcpermcapacity -gcutil -gccause
+        GCT | GC操作花费的总时间  | -gc -gccapacity -gcnew -gcold -gcoldcapacity -gcpermcapacity -gcutil -gccause
+        NGCMN | 新生代最小空间容量，单位KB。  | -gccapacity -gcnewcapacity
+        NGCMX | 新生代最大空间容量，单位KB  | -gccapacity -gcnewcapacity
+        NGC | 新生代当前空间容量，单位KB  | -gccapacity -gcnewcapacity
+        OGCMN |  老年代最小空间容量，单位KB。 | -gccapacity -gcoldcapacity
+        OGCMX |  老年代最大空间容量，单位KB | -gccapacity -gcoldcapacity
+        OGC | 老年代当前空间容量制，单位KB。  | -gccapacity -gcoldcapacity
+        PGCMN |  持久代最小空间容量，单位KB | -gccapacity -gcpermcapacity
+        PGCMX |  持久代最大空间容量，单位KB。 | -gccapacity -gcpermcapacity
+        PGC|  持久代当前空间容量，单位KB。 | -gccapacity -gcpermcapacity
+        PC |  持久代当前空间大小，单位KB | -gccapacity -gcpermcapacity
+        PU |  持久代当前已用空间大小，单位KB | -gccapacity -gcold
+        LGCC |  最后一次GC发生的原因 | -gccause
+        GCC |  当前GC发生的原因 | -gccause
+        TT |  老年化阈值。被移动到老年代之前，在新生代空存活的次数。 | -gcnew
+        MTT |  最大老年化阈值。被移动到老年代之前，在新生代空存活的次数 | -gcnew
+        DSS |  幸存者区所需空间大小，单位KB | -gcnew
+
+
