@@ -16,6 +16,7 @@
         <module>springmvcservlet3-noxml</module>
         <module>springboot-servlet3</module>
         <module>concurrent-test</module>
+        <module>gc</module>
     </modules>
 
 
