@@ -17,6 +17,7 @@
         <module>springboot-servlet3</module>
         <module>concurrent-test</module>
         <module>gc</module>
+        <module>nio-test</module>
     </modules>
 
 
