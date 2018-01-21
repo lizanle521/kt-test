@@ -56,6 +56,8 @@ public class NioClient {
                     String s = new String(data);
                     System.out.println("read data from server : "+s.trim());
                    // socketChannel.write(ByteBuffer.wrap(new String("read success").getBytes()));
+                   // socketChannel.close();
+
                 }
 
 

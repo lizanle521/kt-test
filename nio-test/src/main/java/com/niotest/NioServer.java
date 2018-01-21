@@ -32,7 +32,8 @@ public class NioServer {
         System.out.println("server is starting listener...");
         while (true){
             //当注册的事件到达时，方法返回；否则,该方法会一直阻塞
-            selector.select();
+            int n =selector.select();
+            if (n==0) continue;
             Iterator<SelectionKey> iterator = this.selector.selectedKeys().iterator();
             while (iterator.hasNext()){
                SelectionKey selectionKey = iterator.next();
@@ -48,6 +49,7 @@ public class NioServer {
                    socketChannel.write(ByteBuffer.wrap(new String("im server").getBytes()));
                    //在和客户端链接成功后,为了可以接受client的数据,现在可读时间
                    socketChannel.register(selector,SelectionKey.OP_READ);
+
                }else if (selectionKey.isReadable()){
                    SocketChannel socketChannel = (SocketChannel) selectionKey.channel();
                    ByteBuffer buffer = ByteBuffer.allocate(1024);
@@ -57,7 +59,13 @@ public class NioServer {
                    String s = new String(data);
                    System.out.println("read data from client : "+s.trim());
                    socketChannel.write(ByteBuffer.wrap(new String("read success").getBytes()));
-               }
+                   buffer.clear();
+                 //  socketChannel.close();
+                   //socketChannel.register(selector,SelectionKey.OP_WRITE);
+               }/*else if (selectionKey.isWritable()){
+                   SocketChannel socketChannel = (SocketChannel) selectionKey.channel();
+                   socketChannel.write(ByteBuffer.wrap(new String("read success").getBytes()));
+               }*/
             }
         }
     }
